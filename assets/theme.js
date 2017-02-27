@@ -1495,6 +1495,7 @@ window.Notify = (function() {
     this.cache = {
       $scrollParent: $('html').add('body'),
       $notificationSuccess: $('#NotificationSuccess'),
+      $notificationWishlist: $('#NotificationWishlist'),
       $notificationSuccessLink: $('#NotificationSuccess').find('a'),
       $notificationError: $('#NotificationError'),
       $notificationPromo: $('#NotificationPromo'),
@@ -1584,6 +1585,7 @@ window.Notify = (function() {
 
     // Close all notification bars
     this.cache.$notificationSuccess.attr('aria-hidden', true).removeClass(this.settings.notifyActiveClass);
+    this.cache.$notificationWishlist.attr('aria-hidden', true).removeClass(this.settings.notifyActiveClass);
     this.cache.$notificationError.attr('aria-hidden', true).removeClass(this.settings.notifyActiveClass);
     this.cache.$notificationPromo.attr('aria-hidden', true).removeClass(this.settings.notifyActiveClass);
 
@@ -1809,6 +1811,8 @@ theme.stickyHeader = (function() {
     setTimeout(function() {
       cache.$stickyBar.addClass(config.openTransitionClass);
     }, 0);
+      $('#StickyNav').removeClass('sticky-hide');
+      $('ul.site-nav-second').removeClass('hide');
   }
 
   function unstickNav() {
@@ -1817,6 +1821,9 @@ theme.stickyHeader = (function() {
     }
 
     cache.$stickyBar.removeClass(config.openTransitionClass).removeClass(config.navClass);
+
+    $('#StickyNav').addClass('sticky-hide');
+    $('ul.site-nav-second').addClass('hide');
 
     config.isActive = false;
   }
@@ -1865,7 +1872,7 @@ theme.headerNav = (function() {
     var hideClass = 'hide';
 
     // Set height on nav-bar wrapper so when fixed, doesn't break layout
-    $(selectors.stickyNavWrapper).height($(selectors.stickyNav).height());
+
 
     // Calculate the width of each nav item
     // after forcing them to be visible for the calculations
